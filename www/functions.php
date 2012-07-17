@@ -23,20 +23,6 @@ function logs($log) {
 	return true;
 }
 
-function logs_tag($tags) {
-	$time = time();
-	$filename = 'logs/' . 'tags_' . date('Ymd', $time) . '.tsv';
-	$fp = fopen($filename, 'a');
-	$tsv = '';
-	foreach ($tags as $item) {
-		$tsv .= "\t" . $item;
-	}
-	fwrite($fp, $time . $tsv . "\n");
-	fclose($fp);
-
-	return true;
-}
-
 function logs_dump($url, $html) {
 	$time = time();
 	$filename = 'logs/' . 'dump_' . date('YmdH', $time) . '.tsv';
@@ -137,101 +123,6 @@ function get_result($url) {
 		$lang_pass,
 		$label_fail + $label_pass,
 		$label_pass,
-	));
-
-	logs_tag(array(
-		$url,
-		count($html -> find('a')),
-		count($html -> find('abbr')),
-		count($html -> find('acronym')),
-		count($html -> find('address')),
-		count($html -> find('applet')),
-		count($html -> find('area')),
-		count($html -> find('b')),
-		count($html -> find('base')),
-		count($html -> find('basefont')),
-		count($html -> find('bdo')),
-		count($html -> find('big')),
-		count($html -> find('blockquote')),
-		count($html -> find('body')),
-		count($html -> find('br')),
-		count($html -> find('button')),
-		count($html -> find('caption')),
-		count($html -> find('center')),
-		count($html -> find('cite')),
-		count($html -> find('code')),
-		count($html -> find('col')),
-		count($html -> find('colgroup')),
-		count($html -> find('dd')),
-		count($html -> find('del')),
-		count($html -> find('dfn')),
-		count($html -> find('dir')),
-		count($html -> find('div')),
-		count($html -> find('dl')),
-		count($html -> find('dt')),
-		count($html -> find('em')),
-		count($html -> find('fieldset')),
-		count($html -> find('font')),
-		count($html -> find('form')),
-		count($html -> find('frame')),
-		count($html -> find('frameset')),
-		count($html -> find('h1')),
-		count($html -> find('h2')),
-		count($html -> find('h3')),
-		count($html -> find('h4')),
-		count($html -> find('h5')),
-		count($html -> find('h6')),
-		count($html -> find('head')),
-		count($html -> find('hr')),
-		count($html -> find('html')),
-		count($html -> find('i')),
-		count($html -> find('iframe')),
-		count($html -> find('img')),
-		count($html -> find('input')),
-		count($html -> find('ins')),
-		count($html -> find('isindex')),
-		count($html -> find('kbd')),
-		count($html -> find('label')),
-		count($html -> find('legend')),
-		count($html -> find('li')),
-		count($html -> find('link')),
-		count($html -> find('map')),
-		count($html -> find('menu')),
-		count($html -> find('meta')),
-		count($html -> find('noframes')),
-		count($html -> find('noscript')),
-		count($html -> find('object')),
-		count($html -> find('ol')),
-		count($html -> find('optgroup')),
-		count($html -> find('option')),
-		count($html -> find('p')),
-		count($html -> find('param')),
-		count($html -> find('pre')),
-		count($html -> find('q')),
-		count($html -> find('s')),
-		count($html -> find('samp')),
-		count($html -> find('script')),
-		count($html -> find('select')),
-		count($html -> find('small')),
-		count($html -> find('span')),
-		count($html -> find('strike')),
-		count($html -> find('strong')),
-		count($html -> find('style')),
-		count($html -> find('sub')),
-		count($html -> find('sup')),
-		count($html -> find('table')),
-		count($html -> find('tbody')),
-		count($html -> find('td')),
-		count($html -> find('textarea')),
-		count($html -> find('tfoot')),
-		count($html -> find('th')),
-		count($html -> find('thead')),
-		count($html -> find('title')),
-		count($html -> find('tr')),
-		count($html -> find('tt')),
-		count($html -> find('u')),
-		count($html -> find('ul')),
-		count($html -> find('var')),
 	));
 
 	$html->clear(); 

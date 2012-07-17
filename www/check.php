@@ -1,20 +1,4 @@
 <?php
-/*
-1.
-
-c:bluemotion hyeonseok$ curl http://www.gnjje.go.kr/main.do
-<html><script lang=javascript>
-document.cookie = '_accessKey2=oEoLvvPnbtJRhgsACzauGfdIxFyz-Aez'
-window.location.reload();
-</script></html>
-
-쿠키, 자바스크립트를 사용할 수 있어야만 접근할 수 있는 사이트 처리?
-
-2.
-
-
-*/
-
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	ini_set('display_errors', 16);
 	error_reporting(16);
@@ -37,21 +21,6 @@ $report_message = array(
 	'lang' => '페이지 언어 제공 여부', 
 	'label' => '서식 레이블 제공 여부', 
 );
-
-/*
-$_POST['url'] = <<<sampleurl
-http://www.naver.com/
-http://www.daum.net/
-http://www.paran.com/
-http://www.nate.com/
-http://www.aa.com/
-http://www.yahoo.com/
-http://bing.search.daum.net/search?q=bing
-http://www.apple.com/
-http://www.microsoft.com/
-http://www.hp.com/
-sampleurl;
-//*/
 
 if (isset($_POST['url'])) {
 	$urls = $_POST['url'];
@@ -88,14 +57,8 @@ if (isset($_POST['url'])) {
 			if (!isset($reports[$check_type]['pass'])) {
 				$reports[$check_type]['pass'] = 0;
 			}
-			/*if (!isset($reports[$check_type]['err'])) {
-				$reports[$check_type]['err'] = array();
-			}*/
 			$reports[$check_type]['total'] += $data['total'];
 			$reports[$check_type]['pass'] += $data['pass'];
-			/*if (count($data['err']) > 0) {
-				$reports[$check_type]['err'] = array_merge($reports[$check_type]['err'], $data['err']);
-			}*/
 		}
 	}
 	$total_pages = count($results);
@@ -151,28 +114,8 @@ strong {
 	color: #00c;
 }
 </style>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-195942-10']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
 </head>
 <body>
-<!-- div class="navbar">
-	<div class="navbar-inner">
-		<div class="container-fluid">
-			<a class="brand" href="./check.php">.</a>
-		</div>
-	</div>
-</div -->
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -194,7 +137,6 @@ strong {
 				<h2>검사 결과</h2>
 				<p><?php echo(date('Y년 m월 d일, ', time())); ?><?php echo($total_pages); ?>페이지의 검사대상 페이지에서, </p>
 				<?php
-				//print_r($reports);
 				$is_fail = false;
 				$is_first = true;
 				$has_data = false;
@@ -257,7 +199,6 @@ strong {
 				}
 				echo('</tbody>');
 				echo('</table>');
-				//echo('<pre>'); print_r($results); echo('</pre>');
 				?>
 			</section>
 			<?php } ?>
