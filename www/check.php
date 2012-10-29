@@ -1,20 +1,4 @@
 <?php
-/*
-1.
-
-c:bluemotion hyeonseok$ curl http://www.gnjje.go.kr/main.do
-<html><script lang=javascript>
-document.cookie = '_accessKey2=oEoLvvPnbtJRhgsACzauGfdIxFyz-Aez'
-window.location.reload();
-</script></html>
-
-쿠키, 자바스크립트를 사용할 수 있어야만 접근할 수 있는 사이트 처리?
-
-2.
-
-
-*/
-
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	ini_set('display_errors', 16);
 	error_reporting(16);
@@ -270,7 +254,8 @@ strong {
 				<h2>이 도구의 한계</h2>
 				<ul>
 					<li>자바스크립트나 CSS를 이용하여 브라우저에서 동적으로 생성한 콘텐츠는 검사할 수 없습니다.</li>
-					<li>로그인과 같이 접속 권한이나 쿠키가 필요한 페이지는 검사할 수 없습니다.</li>
+					<li>로그인과 같이 접속 권한이 필요한 페이지는 검사할 수 없습니다.</li>
+					<li>로봇의 접근을 막고 있는 웹사이트는 검사할 수 없습니다.</li>
 					<li>너무 많은 페이지를 넣을 경우 작동이 중간에 중단 될 수 있습니다.</li>
 					<li>속성이름과 속성값 사이에 공백이 없는 등 (&lt;img src="img.png<strong>"a</strong>lt="" /&gt;) HTML 구문에 오류가 있는 경우 오류로 검사됩니다.</li>
 				</ul>
