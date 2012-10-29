@@ -37,6 +37,19 @@ function logs_tag($tags) {
 	return true;
 }
 
+function remove_old_dump_file() {
+	$files = scandir('logs/');
+	$today = date('Ymd', time());
+	foreach ($files as $file) {
+		if (strpos($file, 'dump_') !== false) {
+			$file_date = substr($file, 5, 8);
+			if ($file_date < $today - 7) {
+				unlink('logs/' . $file);
+			}
+		}
+	}
+}
+
 function logs_dump($url, $html) {
 	$time = time();
 	$filename = 'logs/' . 'dump_' . date('YmdH', $time) . '.tsv';
@@ -44,6 +57,8 @@ function logs_dump($url, $html) {
 	$tsv = $url . "\t" . $html . "\n";
 	fwrite($fp, $tsv);
 	fclose($fp);
+
+	remove_old_dump_file();
 
 	return true;
 }
