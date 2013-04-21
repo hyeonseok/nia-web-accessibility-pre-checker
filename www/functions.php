@@ -73,7 +73,15 @@ function get_result($url) {
 	$label_fail = $label_pass = 0;
 	$label_fail_msg = array();
 
-	$html = file_get_html($url);
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+	curl_setopt($curl, CURLOPT_USERAGENT, 'NIA Web Accessibility Pre-Checker');
+	$str = curl_exec($curl);
+	curl_close($curl);
+
+	$html = str_get_html($str);
 	if (!$html) {
 		logs(array($url, 'error'));
 		return false;

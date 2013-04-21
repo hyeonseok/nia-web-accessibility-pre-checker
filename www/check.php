@@ -6,9 +6,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	ini_set('display_errors', 1);
 	error_reporting(1);
 }
-ini_set('user_agent', 'NIA Web Accessibility Pre-Checker');
 ini_set('max_execution_time', '15');
-ini_set('allow_url_fopen', 'On');
 date_default_timezone_set('Asia/Seoul');
 header('Content-type: text/html; charset=utf-8');
 
