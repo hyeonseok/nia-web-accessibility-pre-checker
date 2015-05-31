@@ -148,18 +148,11 @@ strong {
 </script>
 </head>
 <body>
-<!-- div class="navbar">
-	<div class="navbar-inner">
-		<div class="container-fluid">
-			<a class="brand" href="./check.php">.</a>
-		</div>
-	</div>
-</div -->
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
 			<header>
-				<h1><img src="nia.jpg" alt="NIA" width="100"> 웹 접근성 품질마크 자가진단 서비스</h1>
+				<h1>웹 접근성 자가진단 서비스</h1>
 			</header>
 			<section>
 				<h2>진단 대상 페이지</h2>
@@ -245,10 +238,6 @@ strong {
 			<?php } ?>
 
 			<section>
-				<h2>주의사항</h2>
-				<p>자가진단에 해당하는 4개항목의 준수율이 95%이상인 경우 접수</p>
-				<p>※ 대체 텍스트 제공, 제목 제공, 기본 언어 표시, 레이블 제공의 4개 항 목으로 각 항목별 준수율 95% 이상일 경우만 접수 가능</p>
-
 				<h2>이 도구의 한계</h2>
 				<ul>
 					<li>자바스크립트나 CSS를 이용하여 브라우저에서 동적으로 생성한 콘텐츠는 검사할 수 없습니다.</li>
@@ -257,6 +246,11 @@ strong {
 					<li>너무 많은 페이지를 넣을 경우 작동이 중간에 중단 될 수 있습니다.</li>
 					<li>속성이름과 속성값 사이에 공백이 없는 등 (&lt;img src="img.png<strong>"a</strong>lt="" /&gt;) HTML 구문에 오류가 있는 경우 오류로 검사됩니다.</li>
 				</ul>
+			</section>
+
+			<section>
+				<h2>도구 소개</h2>
+				<p>이 페이지의 코드는 <a href="https://github.com/hyeonseok/nia-web-accessibility-pre-checker">깃헙에 공개</a>되어 있습니다.</p>
 			</section>
 		</div>
 	</div>
