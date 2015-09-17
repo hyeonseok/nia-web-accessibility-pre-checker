@@ -1,4 +1,35 @@
 <?php
+class Wast {
+	var $log_file_path;
+
+	function __construct() {
+		$this->log_file_path = dirname(__FILE__) . '/logs/';
+	}
+
+	function get_file_list() {
+		$files = scandir($this->log_file_path);
+
+		$eval = array();
+		$tags = array();
+
+		foreach ($files as $file) {
+			if (strpos($file, 'eval_') !== false) {
+				$eval[] = $file;
+			} else if (strpos($file, 'tags_') !== false) {
+				$tags[] = $file;
+			}
+		}
+
+		rsort($eval);
+		rsort($tags);
+
+		return array(
+			'eval' => $eval, 
+			'tags' => $tags
+		);
+	}
+}
+
 function has_parent($element, $parent) {
 	if ($element -> parent() && $element -> parent() -> tag == $parent) {
 		return true;
