@@ -13,6 +13,9 @@ header('Content-type: text/html; charset=utf-8');
 include('simplehtmldom_1_5/simple_html_dom.php');
 include('functions.php');
 
+$wast = new Wast();
+$recent_sites = $wast->get_recent_sites();
+
 $report_message = array(
 	'img' => '대체텍스트 제공 여부', 
 	'title' => '제목 제공 여부', 
@@ -231,6 +234,26 @@ strong {
 					<li>너무 많은 페이지를 넣을 경우 작동이 중간에 중단 될 수 있습니다.</li>
 					<li>속성이름과 속성값 사이에 공백이 없는 등 (&lt;img src="img.png<strong>"a</strong>lt="" /&gt;) HTML 구문에 오류가 있는 경우 오류로 검사됩니다.</li>
 				</ul>
+			</section>
+
+			<section>
+				<h2>최근 사이트</h2>
+				<?php
+				echo('<table class="table table-bordered">');
+				echo('<thead><tr><th>URL</th><th>이미지</th><th>제목</th><th>언어</th><th>레이블</th></tr></thead>');
+				echo('<tbody>');
+				foreach ($recent_sites as $host => $data) {
+					echo('<tr>');
+					echo('<th><a href="' . $data['scheme'] . '://' . $host . (strlen($data['port']) > 0 ? ':' . $data['port'] : '') . '">' . $host . '</a> (' . $data['url_count'] . ')</th>');
+					echo('<td>' . ($data['image_count'] > 0 ? ceil($data['image_pass'] / $data['image_count'] * 100) . '%' : '-') . '</td>');
+					echo('<td>' . ($data['title_count'] > 0 ? ceil($data['title_pass'] / $data['title_count'] * 100) . '%' : '-') . '</td>');
+					echo('<td>' . ($data['lang_count'] > 0 ? ceil($data['lang_pass'] / $data['lang_count'] * 100) . '%' : '-') . '</td>');
+					echo('<td>' . ($data['label_count'] > 0 ? ceil($data['label_pass'] / $data['label_count'] * 100) . '%' : '-') . '</td>');
+					echo('</tr>');
+				}
+				echo('</tbody>');
+				echo('</table>');
+				?>
 			</section>
 
 			<section>

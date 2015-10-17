@@ -1,13 +1,13 @@
 <?php
 class Wast {
-	var $log_file_path;
+	var $file_path;
 
 	function __construct() {
-		$this->log_file_path = dirname(__FILE__) . '/logs/';
+		$this->file_path = dirname(__FILE__) . '/logs/';
 	}
 
 	function get_file_list() {
-		$files = scandir($this->log_file_path);
+		$files = scandir($this->file_path);
 
 		$eval = array();
 		$tags = array();
@@ -27,6 +27,62 @@ class Wast {
 			'eval' => $eval, 
 			'tags' => $tags
 		);
+	}
+
+	function remove_duplicate_and_sum_by_host_in_week($items) {
+		$time = time();
+		rsort($items);
+		$urls = array();
+		$result = array();
+		foreach ($items as $item) {
+			$explode = explode("\t", trim($item));
+			if ($explode[0] + 60 * 60 * 24 * 7 < $time || $explode[4] == 'error' || in_array($explode[3], $urls)) {
+				continue;
+			}
+			$urls[] = $explode[3];
+			$parse_url = parse_url($explode[3]);
+			$host = $parse_url['host'];
+			if (!isset($result[$host])) {
+				$result[$host] = array(
+					'scheme' => $parse_url['scheme'], 
+					'port' => $parse_url['port'], 
+					'image_count' => $explode[4], 
+					'image_pass' => $explode[5], 
+					'title_count' => $explode[6], 
+					'title_pass' => $explode[7], 
+					'lang_count' => $explode[8], 
+					'lang_pass' => $explode[9], 
+					'label_count' => $explode[10], 
+					'label_pass' => $explode[11], 
+					'url_count' => 1, 
+				);
+			} else {
+				$result[$host] = array(
+					'scheme' => $parse_url['scheme'], 
+					'port' => $parse_url['port'], 
+					'image_count' => $result[$host]['image_count'] + $explode[4], 
+					'image_pass' => $result[$host]['image_pass'] + $explode[5], 
+					'title_count' => $result[$host]['title_count'] + $explode[6], 
+					'title_pass' => $result[$host]['title_pass'] + $explode[7], 
+					'lang_count' => $result[$host]['lang_count'] + $explode[8], 
+					'lang_pass' => $result[$host]['lang_pass'] + $explode[9], 
+					'label_count' => $result[$host]['label_count'] + $explode[10], 
+					'label_pass' => $result[$host]['label_pass'] + $explode[11], 
+					'url_count' => $result[$host]['url_count'] + 1, 
+				);
+			}
+		}
+		return $result;
+	}
+
+	function get_recent_sites() {
+		$file_list = $this->get_file_list();
+		$items = array();
+		for ($i = 0; $i < 8; $i++) { 
+			$items = array_merge($items, file($this->file_path . $file_list['eval'][$i]));
+		}
+		$data = $this->remove_duplicate_and_sum_by_host_in_week($items);
+		return $data;
 	}
 }
 
