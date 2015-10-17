@@ -20,21 +20,6 @@ $report_message = array(
 	'label' => '서식 레이블 제공 여부', 
 );
 
-/*
-$_POST['url'] = <<<sampleurl
-http://www.naver.com/
-http://www.daum.net/
-http://www.paran.com/
-http://www.nate.com/
-http://www.aa.com/
-http://www.yahoo.com/
-http://bing.search.daum.net/search?q=bing
-http://www.apple.com/
-http://www.microsoft.com/
-http://www.hp.com/
-sampleurl;
-//*/
-
 if (isset($_POST['url'])) {
 	$urls = $_POST['url'];
 	$results = array();
