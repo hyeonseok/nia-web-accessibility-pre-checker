@@ -254,7 +254,7 @@ strong {
 					echo('<td>' . ($data['title_count'] > 0 ? ceil($data['title_pass'] / $data['title_count'] * 100) . '%' : '-') . '</td>');
 					echo('<td>' . ($data['lang_count'] > 0 ? ceil($data['lang_pass'] / $data['lang_count'] * 100) . '%' : '-') . '</td>');
 					echo('<td>' . ($data['label_count'] > 0 ? ceil($data['label_pass'] / $data['label_count'] * 100) . '%' : '-') . '</td>');
-					echo('<td>' . date('Y-m-d', $data['time']) . '</td>');
+					echo('<td>' . date('Y-m-d H:i', $data['time']) . '</td>');
 					echo('</tr>');
 				}
 				echo('</tbody>');
