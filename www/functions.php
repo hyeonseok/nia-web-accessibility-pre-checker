@@ -44,6 +44,7 @@ class Wast {
 			$host = $parse_url['host'];
 			if (!isset($result[$host])) {
 				$result[$host] = array(
+					'time' => $explode[0],
 					'scheme' => $parse_url['scheme'], 
 					'port' => $parse_url['port'], 
 					'image_count' => $explode[4], 
@@ -58,6 +59,7 @@ class Wast {
 				);
 			} else {
 				$result[$host] = array(
+					'time' => $result[$host]['time'],
 					'scheme' => $parse_url['scheme'], 
 					'port' => $parse_url['port'], 
 					'image_count' => $result[$host]['image_count'] + $explode[4], 
@@ -78,7 +80,7 @@ class Wast {
 	function get_recent_sites() {
 		$file_list = $this->get_file_list();
 		$items = array();
-		for ($i = 0; $i < 8; $i++) { 
+		for ($i = 0; $i < 8; $i++) {
 			$items = array_merge($items, file($this->file_path . $file_list['eval'][$i]));
 		}
 		$data = $this->remove_duplicate_and_sum_by_host_in_week($items);

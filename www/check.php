@@ -240,7 +240,7 @@ strong {
 				<h2>최근 사이트</h2>
 				<?php
 				echo('<table class="table table-bordered">');
-				echo('<thead><tr><th>URL</th><th>이미지</th><th>제목</th><th>언어</th><th>레이블</th></tr></thead>');
+				echo('<thead><tr><th>호스트</th><th>이미지</th><th>제목</th><th>언어</th><th>레이블</th><th>날짜</th></tr></thead>');
 				echo('<tbody>');
 				foreach ($recent_sites as $host => $data) {
 					echo('<tr>');
@@ -249,6 +249,7 @@ strong {
 					echo('<td>' . ($data['title_count'] > 0 ? ceil($data['title_pass'] / $data['title_count'] * 100) . '%' : '-') . '</td>');
 					echo('<td>' . ($data['lang_count'] > 0 ? ceil($data['lang_pass'] / $data['lang_count'] * 100) . '%' : '-') . '</td>');
 					echo('<td>' . ($data['label_count'] > 0 ? ceil($data['label_pass'] / $data['label_count'] * 100) . '%' : '-') . '</td>');
+					echo('<td>' . date('Y-m-d', $data['time']) . '</td>');
 					echo('</tr>');
 				}
 				echo('</tbody>');
