@@ -242,7 +242,12 @@ strong {
 				echo('<table class="table table-bordered">');
 				echo('<thead><tr><th>호스트</th><th>이미지</th><th>제목</th><th>언어</th><th>레이블</th><th>날짜</th></tr></thead>');
 				echo('<tbody>');
+				$etc = array();
 				foreach ($recent_sites as $host => $data) {
+					if ($data['url_count'] < 2) {
+						$etc[] = $host;
+						continue;
+					}
 					echo('<tr>');
 					echo('<th><a href="' . $data['scheme'] . '://' . $host . (strlen($data['port']) > 0 ? ':' . $data['port'] : '') . '">' . $host . '</a> (' . $data['url_count'] . ')</th>');
 					echo('<td>' . ($data['image_count'] > 0 ? ceil($data['image_pass'] / $data['image_count'] * 100) . '%' : '-') . '</td>');
@@ -254,6 +259,8 @@ strong {
 				}
 				echo('</tbody>');
 				echo('</table>');
+
+				echo('<p>기타: ' . implode(', ', $etc) . '</p>');
 				?>
 			</section>
 
